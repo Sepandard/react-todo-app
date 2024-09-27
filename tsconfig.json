@@ -18,7 +18,25 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@features/*": ["./app/features"],
+      "@features": ["./app/features/index.ts"],
+
+      "@shared/*": ["./app/shared"],
+      "@shared": ["./app/shared/index.ts"],      
+
+      "@utils": ["./app/utils/index.ts"],
+      "@utils/*": ["./app/utils"],
+
+      "@components/*": ["./app/components/*"],
+      "@components": ["./app/components/index.ts"],    
+
+      "@auth/*": ["./app/auth/*"],
+      "@auth": ["./app/auth/index.ts"],
+      "@style": ["./assets/styles/common.scss"],
+    },
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

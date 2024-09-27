@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import NormalizeStyles from 'app/utils/style/NormalizeStyles'
+import BaseStyles from 'app/utils/style/BaseStyles'
 import './App.css'
+import './assets/style/fontStyles.css'
+import { AppRouter } from './app/router'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-       <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+      <NormalizeStyles />
+      <BaseStyles />
+      <AppRouter />
     </>
   )
 }
