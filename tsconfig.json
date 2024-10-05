@@ -21,11 +21,12 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./src",
     "paths": {
-      "@features/*": ["./app/features"],
-      "@features": ["./app/features/index.ts"],
+      "@pages/*": ["./app/pages"],
+      "@pages": ["./app/pages/index.ts"],
 
       "@shared/*": ["./app/shared"],
       "@shared": ["./app/shared/index.ts"],      
+      "@http": ["./app/shared/hooks/useClient.ts"],      
 
       "@utils": ["./app/utils/index.ts"],
       "@utils/*": ["./app/utils"],

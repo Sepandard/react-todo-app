@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { AppRoot } from '@features/layout';
+import { AppRoot } from '@pages/layout';
 import { useMemo } from 'react';
 
 export const createAppRouter = () =>
@@ -11,8 +11,22 @@ export const createAppRouter = () =>
         {
           path: '/auth/login/',
           lazy: async () => {
-            const {LoginLayout } = await import('./features/auth/LoginLayout');
+            const { LoginLayout } = await import('./pages/auth/login/LoginLayout');
             return { Component: LoginLayout };
+          },
+        },
+        // {
+        //   path: '/auth/sing-up/',
+        //   lazy: async () => {
+        //     const {LoginLayout } = await import('./pages/auth/LoginLayout');
+        //     return { Component: LoginLayout };
+        //   },
+        // },
+        {
+          path: 'dashboard',
+          lazy: async () => {
+            const { DashboardLayout } = await import('./pages/dashboard/DashboardLayout');
+            return { Component: DashboardLayout };
           },
         },
       ],
@@ -22,7 +36,5 @@ export const createAppRouter = () =>
 export const AppRouter = () => {
   const router = useMemo(() => createAppRouter(), []);
 
-  return (
-    <RouterProvider router={router} />
-  );
+  return <RouterProvider router={router} />;
 };
