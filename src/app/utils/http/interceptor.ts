@@ -1,13 +1,12 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 import { getToken, removeToken } from '../auth/token';
-import { useNavigate } from 'react-router-dom';
-
+import history from "../browser/browserHistory";
 
 
 export const apiClient = axios.create();
 
 
-const navigate = useNavigate();
+// const navigate = useNavigate();
 const authInterceptor = (config: InternalAxiosRequestConfig) => {
   if (config.headers) {
     config.headers.Accept = 'application/json';
@@ -27,7 +26,7 @@ apiClient.interceptors.response.use(
       removeToken();
       const searchParams = new URLSearchParams();
       const redirectTo = searchParams.get('redirectTo');
-      navigate(`/auth/login?redirectTo=${redirectTo}`);
+      history.push(`/auth/login?redirectTo=${redirectTo}`);
     }
 
     return Promise.reject(new Error(error));
