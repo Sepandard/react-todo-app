@@ -6,7 +6,6 @@ import history from "../browser/browserHistory";
 export const apiClient = axios.create();
 
 
-// const navigate = useNavigate();
 const authInterceptor = (config: InternalAxiosRequestConfig) => {
   if (config.headers) {
     config.headers.Accept = 'application/json';

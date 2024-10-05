@@ -3,13 +3,17 @@ import useMergeState from './useMergeState';
 import { constructUrl, httpClient } from '@utils/http';
 
 type HttpMethod = 'post' | 'put' | 'deleteFn';
-type MutationState<T> = {
+type AliasState = 'isCreating' | 'isUpdating' | 'isDeleting' | 'isWorking';
+type MutationState<T = unknown> = {
   data: T | null;
   error: any;
   isWorking: boolean;
 };
 
-const useMutation = <T = any>(method: HttpMethod, path: string | string[]) => {
+const useMutation = <T>(
+  method: HttpMethod,
+  path: string | string[],
+): [(MutationState<T> & { [key in AliasState]?: boolean }) , (variable: any) => Promise<T>] => {
   const endpoint = constructUrl(path);
 
   const [state, mergeState] = useMergeState<MutationState<T>>({
@@ -32,7 +36,7 @@ const useMutation = <T = any>(method: HttpMethod, path: string | string[]) => {
             },
             (error) => {
               mergeState({ error, data: null, isWorking: false });
-              reject(error);
+              reject(new Error(error));
             },
           );
       }),
@@ -48,7 +52,7 @@ const useMutation = <T = any>(method: HttpMethod, path: string | string[]) => {
   ];
 };
 
-const getIsWorkingAlias = (method: HttpMethod) => {
+const getIsWorkingAlias = (method: HttpMethod): AliasState => {
   switch (method) {
     case 'post':
       return 'isCreating';
