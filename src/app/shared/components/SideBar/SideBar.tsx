@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from '../Icon/Icon';
 
 export interface SidebarItem {
     path: string;
@@ -15,18 +16,18 @@ export interface SidebarProps {
 
 export const Sidebar = ({ config, userPermissions } : SidebarProps) => {
   return (
-    <div className="h-screen w-64 bg-gray-800 text-white">
+    <div className="h-screen w-64 bg-blue-800 text-white">
       <div className="flex flex-col justify-between h-full">
-        {/* Sidebar Items */}
-        <ul className="mt-6 space-y-4">
+
+        <ul className="mt-6 space-y-2">
           {config.map((item, index) => {
-            // Access check
+      
             if (!userPermissions.includes(item.access)) return null;
 
             return (
-              <li key={index} className="px-4 py-2 hover:bg-gray-700 rounded">
+              <li key={index} className="px-6 py-3 hover:bg-gray-100 hover:bg-opacity-25 rounded">
                 <a href={item.path} className="flex items-center space-x-4">
-                  {/* {item.icon && <item.icon className="h-5 w-5" />} */}
+                  {item.icon && <Icon type={item.icon} />}
                   <span>{item.label}</span>
                 </a>
               </li>
@@ -34,9 +35,8 @@ export const Sidebar = ({ config, userPermissions } : SidebarProps) => {
           })}
         </ul>
 
-        {/* Logout or other options */}
         <div className="px-4 py-2">
-          <button className="w-full bg-red-600 text-white py-2 rounded">
+          <button className="w-full bg-white text-gray-800 py-2 rounded">
             Logout
           </button>
         </div>
